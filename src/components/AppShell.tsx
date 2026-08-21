@@ -1,8 +1,26 @@
 import BookOpen from 'lucide-react/dist/esm/icons/book-open.mjs'
 import Plus from 'lucide-react/dist/esm/icons/plus.mjs'
-import { Link, Outlet } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { AddVideoDialog } from '../features/videos/AddVideoDialog.tsx'
+import { appConfig } from '../lib/config/appConfig.ts'
 
 export function AppShell() {
+  const navigate = useNavigate()
+  const [isAddVideoOpen, setIsAddVideoOpen] = useState(false)
+  const [notice, setNotice] = useState<string | null>(null)
+
+  function handleCreated(videoId: string | null) {
+    setIsAddVideoOpen(false)
+
+    if (videoId) {
+      void navigate(`/watch/${encodeURIComponent(videoId)}`)
+      return
+    }
+
+    setNotice('Video added to your library.')
+  }
+
   return (
     <div className="min-h-dvh bg-canvas text-ink">
       <a
@@ -24,6 +42,10 @@ export function AppShell() {
           </Link>
           <button
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-ink/88 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            onClick={() => {
+              setNotice(null)
+              setIsAddVideoOpen(true)
+            }}
             type="button"
           >
             <Plus aria-hidden="true" size={17} />
@@ -33,8 +55,22 @@ export function AppShell() {
         </div>
       </header>
       <main id="main-content">
+        {notice ? (
+          <p
+            className="fixed bottom-5 left-1/2 z-40 -translate-x-1/2 rounded-full bg-emerald-700 px-5 py-3 text-sm font-semibold text-white shadow-xl"
+            role="status"
+          >
+            {notice}
+          </p>
+        ) : null}
         <Outlet />
       </main>
+      <AddVideoDialog
+        isOpen={isAddVideoOpen}
+        onClose={() => setIsAddVideoOpen(false)}
+        onCreated={handleCreated}
+        userId={appConfig.userId}
+      />
     </div>
   )
 }
