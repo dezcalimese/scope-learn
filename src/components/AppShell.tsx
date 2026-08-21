@@ -44,6 +44,7 @@ export function AppShell() {
           <div className="flex items-center gap-2">
             <ProfileButton />
             <button
+              aria-label="Add video"
               className="inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-ink/88 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               onClick={() => {
                 setNotice(null)

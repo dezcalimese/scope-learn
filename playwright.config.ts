@@ -15,6 +15,18 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+    {
+      name: 'mobile-chromium',
+      use: { ...devices['Pixel 7'] },
+    },
+    {
+      name: 'tablet-chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+        hasTouch: true,
+        viewport: { width: 768, height: 1024 },
+      },
+    },
   ],
   webServer: {
     command: 'bun run dev --host 127.0.0.1 --port 4173',
