@@ -15,7 +15,8 @@ The first release is complete when a reviewer can:
 - Play, pause, seek, change volume, mute, change playback speed, and enter full screen.
 - Create a video with a title, description, and valid video URL.
 - See comments for the selected video.
-- Add a comment with a display name.
+- Create a simple learner profile with a display name.
+- Add a comment with that display name and change the name when needed.
 - Use the main flows with a keyboard and on a small screen.
 - See useful loading, empty, success, and error states.
 - Follow the README to install, run, test, and build the app with Bun.
@@ -62,6 +63,17 @@ The assessment user ID will be a public build-time value in snake case. The app 
 
 No global client state library is planned. Server data belongs in TanStack Query. The route owns video selection. Forms and player controls keep local state.
 
+### Learner Identity
+
+The API accepts a free-form `user_id` for each comment. It does not provide registration, passwords, sessions, or protected account data. The app will therefore provide a lightweight local learner profile instead of false authentication.
+
+- Ask for a display name before the first comment if no profile exists.
+- Convert the display name to a stable comment `user_id` value.
+- Save the profile in browser storage so it remains available after refresh.
+- Show the current profile in the app header and let the user change it.
+- Do not collect an email address, password, or other personal data.
+- Explain in the README that this profile is local identity, not secure authentication.
+
 ## 5. User Experience Plan
 
 ### Information Architecture
@@ -69,6 +81,7 @@ No global client state library is planned. Server data belongs in TanStack Query
 - `/` — Video library with a compact product header, a short learning prompt, the video grid, and an **Add video** action.
 - `/watch/:videoId` — Video player, lesson title and description, video navigation, and discussion.
 - A modal or side sheet — New video form. It keeps the current page visible and returns the user to the new lesson after success.
+- A small profile menu — Set or change the local learner display name used for comments.
 
 A separate marketing splash page is not part of the first release. The library will provide a small branded introduction without adding a step before the core task.
 
@@ -209,18 +222,21 @@ Planned commit:
 
 1. `feat: add video creation`
 
-### Phase 5 — Comments
+### Phase 5 — Learner Profile and Comments
 
+- [ ] Add a local learner profile with display-name setup and edit actions.
+- [ ] Save and validate the profile in browser storage.
+- [ ] Require a profile before comment submission.
 - [ ] Load comments only for the selected video.
 - [ ] Build readable comment items with generated avatars.
-- [ ] Add display-name and comment fields.
+- [ ] Add the comment field and use the active profile as its author.
 - [ ] Update comments after a successful write.
 - [ ] Add empty, pending, and error states.
-- [ ] Test comment load and submission.
+- [ ] Test profile setup, profile recovery, comment load, and comment submission.
 
 Planned commit:
 
-1. `feat: add lesson discussions`
+1. `feat: add learner profiles and lesson discussions`
 
 ### Phase 6 — Quality and Submission
 
@@ -246,7 +262,8 @@ Planned commits:
 | Library | Loading, empty, populated, retry, selection, responsive grid |
 | Player | Load, play, pause, seek, speed, volume, mute, full screen, keyboard, media error |
 | Video form | Required fields, invalid URL, duplicate submit guard, success, server error |
-| Comments | Loading, empty, populated, validation, write success, write failure |
+| Profile | First setup, saved profile, invalid storage, edit name, refresh recovery |
+| Comments | Profile required, loading, empty, populated, validation, write success, write failure |
 | Accessibility | Landmark order, labels, focus, keyboard access, contrast, reduced motion |
 | End to end | Open lesson, create video, create comment, refresh a deep link |
 
@@ -257,6 +274,7 @@ Planned commits:
 - Video list and selection.
 - Video creation.
 - Comment list and creation.
+- A local learner profile for comment identity.
 - Full playback controls, speed, volume, and full screen.
 - Responsive and accessible states.
 - Tests, README, and screenshots.
@@ -271,7 +289,7 @@ Planned commits:
 
 ### Not Planned
 
-- Authentication or account management.
+- Secure authentication, passwords, sessions, or remote account management. The backend does not support these features.
 - Video file upload or storage.
 - Likes, follows, playlists, or analytics.
 - A separate marketing site.
