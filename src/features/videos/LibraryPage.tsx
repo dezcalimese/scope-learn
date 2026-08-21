@@ -1,7 +1,38 @@
-import Play from 'lucide-react/dist/esm/icons/play.mjs'
 import { appConfig } from '../../lib/config/appConfig.ts'
+import { LibrarySkeleton } from './LibrarySkeleton.tsx'
+import {
+  ConfigurationState,
+  EmptyLibraryState,
+  ErrorLibraryState,
+} from './LibraryState.tsx'
+import { VideoCard } from './VideoCard.tsx'
+import { useVideos } from './videoQueries.ts'
 
 export function LibraryPage() {
+  const videosQuery = useVideos(appConfig.userId)
+
+  let libraryContent
+
+  if (appConfig.userId === null) {
+    libraryContent = <ConfigurationState />
+  } else if (videosQuery.isPending) {
+    libraryContent = <LibrarySkeleton />
+  } else if (videosQuery.isError) {
+    libraryContent = (
+      <ErrorLibraryState retry={() => void videosQuery.refetch()} />
+    )
+  } else if (videosQuery.data.length === 0) {
+    libraryContent = <EmptyLibraryState />
+  } else {
+    libraryContent = (
+      <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+        {videosQuery.data.map((video) => (
+          <VideoCard key={video.videoId} video={video} />
+        ))}
+      </div>
+    )
+  }
+
   return (
     <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
       <section className="max-w-3xl">
@@ -30,24 +61,7 @@ export function LibraryPage() {
           </div>
         </div>
 
-        <div className="mt-6 grid min-h-72 place-items-center rounded-3xl border border-dashed border-line bg-white/55 p-8 text-center">
-          <div className="max-w-md">
-            <span className="mx-auto grid size-13 place-items-center rounded-2xl bg-indigo-50 text-indigo-700">
-              <Play aria-hidden="true" fill="currentColor" size={20} />
-            </span>
-            <h3 className="mt-5 text-lg font-semibold">Foundation ready</h3>
-            <p className="mt-2 leading-7 text-muted">
-              Video loading arrives in the next phase. The app shell, routes,
-              query cache, configuration, and API boundary are now in place.
-            </p>
-            {appConfig.userId === null ? (
-              <p className="mt-4 rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-900">
-                Add your snake-case name to <code>VITE_USER_ID</code> before API
-                write tests.
-              </p>
-            ) : null}
-          </div>
-        </div>
+        <div className="mt-6">{libraryContent}</div>
       </section>
     </div>
   )
