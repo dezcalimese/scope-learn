@@ -34,7 +34,7 @@ Base URL: `https://take-home-assessment-423502.uc.r.appspot.com/api`
 | `GET` | `/videos/comments?video_id={video_id}` | Get video comments | Required `video_id` query value |
 | `POST` | `/videos/comments` | Create a comment | `video_id`, `content`, `user_id` |
 
-The API documentation describes successful responses as strings. A read-only check confirmed that the video list has the shape `{ "videos": [] }` when it is empty. Phase 1 will record all real response shapes before UI work begins. The API adapter will normalize these responses so that API details do not enter UI components.
+The API documentation describes successful responses as strings. Live checks confirmed that list responses use `{ "videos": [] }` and write responses use `{ "success": "POST /videos" }` or the matching operation name. The API adapter normalizes these responses so that API details do not enter UI components.
 
 The assessment user ID will be a public build-time value in snake case. The app will read it from `VITE_USER_ID`. It must contain the candidate's first and last name, for example `john_smith`.
 
@@ -164,7 +164,7 @@ Each phase must end in a working state. Commit names can change when the exact w
 - [x] Confirm the local Bun runtime.
 - [x] Select the stack and application structure.
 - [x] Write this roadmap.
-- [ ] Set the candidate `VITE_USER_ID` before API write tests.
+- [x] Set the candidate `VITE_USER_ID` to `dez_calimese` before API write tests.
 
 Planned commit:
 
@@ -172,12 +172,12 @@ Planned commit:
 
 ### Phase 1 — Foundation and API Contract
 
-- [ ] Create the Vite React TypeScript app with Bun.
-- [ ] Add router, query provider, global styles, lint, format, and test setup.
-- [ ] Add `.env.example` with `VITE_API_BASE_URL` and `VITE_USER_ID`.
-- [ ] Probe each API operation with disposable test data and record real response fixtures.
-- [ ] Implement the typed API client and response normalization.
-- [ ] Add unit tests for response parsing and errors.
+- [x] Create the Vite React TypeScript app with Bun.
+- [x] Add router, query provider, global styles, lint, format, and test setup.
+- [x] Add `.env.example` with `VITE_API_BASE_URL` and `VITE_USER_ID`.
+- [x] Probe each API operation with disposable test data and record real response fixtures.
+- [x] Implement the typed API client and response normalization.
+- [x] Add unit tests for response parsing and errors.
 
 Planned commits:
 
@@ -186,12 +186,12 @@ Planned commits:
 
 ### Phase 2 — App Shell and Video Library
 
-- [ ] Build the responsive shell and design tokens.
-- [ ] Load the configured user's videos.
-- [ ] Build video cards and deterministic preview art.
-- [ ] Add loading, empty, and error states.
-- [ ] Add route-based video selection.
-- [ ] Test library states and keyboard navigation.
+- [x] Build the responsive shell and design tokens.
+- [x] Load the configured user's videos.
+- [x] Build video cards and deterministic preview art.
+- [x] Add loading, empty, and error states.
+- [x] Add route-based video selection.
+- [x] Test library states and keyboard navigation.
 
 Planned commit:
 
@@ -199,11 +199,11 @@ Planned commit:
 
 ### Phase 3 — Watch Experience
 
-- [ ] Build the lesson page and direct-media player.
-- [ ] Add seek, play, pause, volume, mute, speed, and full-screen controls.
-- [ ] Add player keyboard commands and visible focus states.
-- [ ] Add unsupported-media and playback error states.
-- [ ] Test player state logic and the main controls.
+- [x] Build the lesson page and direct-media player.
+- [x] Add seek, play, pause, volume, mute, speed, and full-screen controls.
+- [x] Add player keyboard commands and visible focus states.
+- [x] Add unsupported-media and playback error states.
+- [x] Test player state logic and the main controls.
 
 Planned commit:
 
@@ -211,12 +211,12 @@ Planned commit:
 
 ### Phase 4 — Create Video Flow
 
-- [ ] Build the responsive modal or sheet.
-- [ ] Validate title, description, and URL.
-- [ ] Submit with the configured assessment user ID.
-- [ ] Update the library cache and open the created video.
-- [ ] Add pending, success, and server error feedback.
-- [ ] Test form validation and submission.
+- [x] Build the responsive modal or sheet.
+- [x] Validate title, description, and URL.
+- [x] Submit with the configured assessment user ID.
+- [x] Update the library cache and open the created video when the API returns an ID.
+- [x] Add pending, success, and server error feedback.
+- [x] Test form validation and submission.
 
 Planned commit:
 
@@ -224,15 +224,15 @@ Planned commit:
 
 ### Phase 5 — Learner Profile and Comments
 
-- [ ] Add a local learner profile with display-name setup and edit actions.
-- [ ] Save and validate the profile in browser storage.
-- [ ] Require a profile before comment submission.
-- [ ] Load comments only for the selected video.
-- [ ] Build readable comment items with generated avatars.
-- [ ] Add the comment field and use the active profile as its author.
-- [ ] Update comments after a successful write.
-- [ ] Add empty, pending, and error states.
-- [ ] Test profile setup, profile recovery, comment load, and comment submission.
+- [x] Add a local learner profile with display-name setup and edit actions.
+- [x] Save and validate the profile in browser storage.
+- [x] Require a profile before comment submission.
+- [x] Load comments only for the selected video.
+- [x] Build readable comment items with generated avatars.
+- [x] Add the comment field and use the active profile as its author.
+- [x] Update comments after a successful write.
+- [x] Add empty, pending, and error states.
+- [x] Test profile setup, profile recovery, comment load, and comment submission.
 
 Planned commit:
 

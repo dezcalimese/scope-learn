@@ -71,6 +71,9 @@ describe('API response schemas', () => {
       id: 'video-2',
     })
     expect(createdResourceSchema.parse(null)).toEqual({ id: null })
+    expect(createdResourceSchema.parse({ success: 'POST /videos' })).toEqual({
+      id: null,
+    })
   })
 
   it('rejects a video without an ID', () => {

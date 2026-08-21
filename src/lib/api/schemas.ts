@@ -99,6 +99,7 @@ export const createdResourceSchema = z
       z.object({ id: z.string().min(1) }),
       z.object({ video_id: z.string().min(1) }),
       z.object({ comment_id: z.string().min(1) }),
+      z.object({ success: z.string().min(1) }),
       z.null(),
     ]),
   )
@@ -117,6 +118,10 @@ export const createdResourceSchema = z
 
     if ('comment_id' in result) {
       return { id: result.comment_id }
+    }
+
+    if ('success' in result) {
+      return { id: null }
     }
 
     return { id: result.id }

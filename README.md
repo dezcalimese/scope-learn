@@ -17,7 +17,7 @@ bun install
 cp .env.example .env
 ```
 
-Replace `first_last` in `.env` with the candidate's first and last name in snake case. Then start the development server:
+The assessment owner ID is configured as `dez_calimese`. Then start the development server:
 
 ```bash
 bun run dev
