@@ -23,6 +23,8 @@ Replace `first_last` in `.env` with the candidate's first and last name in snake
 bun run dev
 ```
 
+The development server proxies `/api` to the supplied assessment service because that service does not return browser CORS headers. Production hosting must use the same route. The included Vercel configuration provides this rewrite.
+
 ## Checks
 
 ```bash

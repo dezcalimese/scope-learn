@@ -5,9 +5,7 @@ describe('readAppConfig', () => {
   it('uses the service URL and reports a missing user ID', () => {
     const config = readAppConfig({})
 
-    expect(config.apiBaseUrl).toBe(
-      'https://take-home-assessment-423502.uc.r.appspot.com/api',
-    )
+    expect(config.apiBaseUrl).toBe('/api')
     expect(config.userId).toBeNull()
     expect(config.issues).toContain('VITE_USER_ID is not set.')
   })

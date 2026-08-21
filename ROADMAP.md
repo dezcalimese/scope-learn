@@ -293,7 +293,7 @@ Planned commits:
 - Video file upload or storage.
 - Likes, follows, playlists, or analytics.
 - A separate marketing site.
-- A custom backend or proxy unless browser CORS rules make it necessary.
+- A custom backend. A thin same-origin proxy is required because the supplied API does not return browser CORS headers.
 
 ## 10. Known Risks and Responses
 
@@ -303,6 +303,7 @@ Planned commits:
 | The API list is filtered by one user ID | Make the required candidate ID a validated environment value. |
 | A URL is not direct playable media | Show a useful error; keep provider support behind an adapter; add YouTube only after core work is stable. |
 | The remote API is slow or unavailable | Show skeletons, bounded retry behavior, clear errors, and manual retry. Use mocks for deterministic tests. |
+| The API does not permit direct browser requests | Use the same `/api` path through the Vite development proxy and the deployment host rewrite. |
 | Full-screen APIs differ by browser | Use the standard Fullscreen API with a clear fallback and test in Chromium and WebKit. |
 | Visual polish can expand the task | Complete one simple design system and all required states before optional motion or provider work. |
 

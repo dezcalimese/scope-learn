@@ -1,7 +1,6 @@
 import { z } from 'zod'
 
-const DEFAULT_API_BASE_URL =
-  'https://take-home-assessment-423502.uc.r.appspot.com/api'
+const DEFAULT_API_BASE_URL = '/api'
 
 const userIdSchema = z
   .string()
@@ -11,7 +10,14 @@ const userIdSchema = z
     'Use a snake-case first and last name, for example jane_doe.',
   )
 
-const apiBaseUrlSchema = z.url().transform((url) => url.replace(/\/$/, ''))
+const apiBaseUrlSchema = z
+  .string()
+  .trim()
+  .refine(
+    (value) => value.startsWith('/') || z.url().safeParse(value).success,
+    'VITE_API_BASE_URL must be an absolute URL or a root-relative path.',
+  )
+  .transform((url) => url.replace(/\/$/, ''))
 
 export interface AppConfig {
   apiBaseUrl: string
@@ -33,7 +39,9 @@ export function readAppConfig(
   const userIdResult = rawUserId ? userIdSchema.safeParse(rawUserId) : null
 
   if (!baseUrlResult.success) {
-    issues.push('VITE_API_BASE_URL must be a valid URL.')
+    issues.push(
+      'VITE_API_BASE_URL must be an absolute URL or a root-relative path.',
+    )
   }
 
   if (userIdResult !== null && !userIdResult.success) {
