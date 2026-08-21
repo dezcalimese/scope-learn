@@ -50,6 +50,41 @@ button {
   background: #4f46e5;
 }
 
+.player-range {
+  height: 1rem;
+  cursor: pointer;
+}
+
+.player-range::-webkit-slider-runnable-track {
+  height: 0.25rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.38);
+}
+
+.player-range::-webkit-slider-thumb {
+  width: 0.85rem;
+  height: 0.85rem;
+  margin-top: -0.3rem;
+  border: 0;
+  border-radius: 999px;
+  background: white;
+  appearance: none;
+}
+
+.player-range::-moz-range-track {
+  height: 0.25rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.38);
+}
+
+.player-range::-moz-range-thumb {
+  width: 0.85rem;
+  height: 0.85rem;
+  border: 0;
+  border-radius: 999px;
+  background: white;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

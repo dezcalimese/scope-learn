@@ -1,6 +1,7 @@
 import ArrowLeft from 'lucide-react/dist/esm/icons/arrow-left.mjs'
 import CircleAlert from 'lucide-react/dist/esm/icons/circle-alert.mjs'
 import { Link, useParams } from 'react-router-dom'
+import { VideoPlayer } from '../player/VideoPlayer.tsx'
 import { useVideo } from './videoQueries.ts'
 
 export function WatchPage() {
@@ -45,22 +46,35 @@ export function WatchPage() {
           </div>
         </section>
       ) : (
-        <article className="mt-6">
-          <div className="grid aspect-video place-items-center rounded-3xl bg-ink text-white shadow-2xl shadow-indigo-950/10">
-            <p className="text-sm text-white/70">
-              The complete player arrives in the next phase.
+        <div className="mt-6 grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_22rem]">
+          <article className="min-w-0">
+            <VideoPlayer
+              title={videoQuery.data.title}
+              url={videoQuery.data.videoUrl}
+            />
+            <p className="mt-8 text-sm font-semibold uppercase tracking-[0.15em] text-indigo-700">
+              Video lesson
             </p>
-          </div>
-          <p className="mt-8 text-sm font-semibold uppercase tracking-[0.15em] text-indigo-700">
-            Video lesson
-          </p>
-          <h1 className="mt-3 max-w-4xl text-3xl font-semibold tracking-[-0.035em] sm:text-5xl">
-            {videoQuery.data.title}
-          </h1>
-          <p className="mt-5 max-w-3xl text-lg leading-8 text-muted">
-            {videoQuery.data.description}
-          </p>
-        </article>
+            <h1 className="mt-3 max-w-4xl text-3xl font-semibold tracking-[-0.035em] sm:text-5xl">
+              {videoQuery.data.title}
+            </h1>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-muted">
+              {videoQuery.data.description}
+            </p>
+          </article>
+          <aside
+            aria-labelledby="discussion-title"
+            className="rounded-3xl border border-line bg-white/65 p-6"
+          >
+            <p className="text-sm font-medium text-muted">Discussion</p>
+            <h2 className="mt-1 text-xl font-semibold" id="discussion-title">
+              Learn together
+            </h2>
+            <p className="mt-4 text-sm leading-6 text-muted">
+              Lesson comments arrive after the video creation flow.
+            </p>
+          </aside>
+        </div>
       )}
     </div>
   )
