@@ -240,13 +240,13 @@ Planned commit:
 
 ### Phase 6 — Quality and Submission
 
-- [ ] Test the full app at mobile, tablet, and desktop widths.
-- [ ] Check keyboard use, focus order, contrast, labels, and reduced motion.
-- [ ] Test slow network, offline, empty, validation, API error, and invalid media cases.
-- [ ] Run type checks, lint, unit tests, end-to-end tests, and the production build.
-- [ ] Remove development logs and confirm that no secret is in the client bundle.
-- [ ] Write the final README with setup, architecture, choices, trade-offs, and test steps.
-- [ ] Capture desktop and mobile screenshots and add them to the README.
+- [x] Test the full app at mobile, tablet, and desktop widths.
+- [x] Check keyboard use, focus order, contrast, labels, and reduced motion.
+- [x] Test slow network, offline, empty, validation, API error, and invalid media cases.
+- [x] Run type checks, lint, unit tests, end-to-end tests, and the production build.
+- [x] Remove development logs and confirm that no secret is in the client bundle.
+- [x] Write the final README with setup, architecture, choices, trade-offs, and test steps.
+- [x] Capture desktop and mobile screenshots and add them to the README.
 
 Planned commits:
 
