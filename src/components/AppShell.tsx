@@ -3,6 +3,7 @@ import Plus from 'lucide-react/dist/esm/icons/plus.mjs'
 import { useState } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { AddVideoDialog } from '../features/videos/AddVideoDialog.tsx'
+import { ProfileButton } from '../features/profile/ProfileButton.tsx'
 import { appConfig } from '../lib/config/appConfig.ts'
 
 export function AppShell() {
@@ -40,18 +41,21 @@ export function AppShell() {
             </span>
             <span>Scope Learn</span>
           </Link>
-          <button
-            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-ink/88 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            onClick={() => {
-              setNotice(null)
-              setIsAddVideoOpen(true)
-            }}
-            type="button"
-          >
-            <Plus aria-hidden="true" size={17} />
-            <span className="hidden sm:inline">Add video</span>
-            <span className="sm:hidden">Add</span>
-          </button>
+          <div className="flex items-center gap-2">
+            <ProfileButton />
+            <button
+              className="inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-ink/88 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              onClick={() => {
+                setNotice(null)
+                setIsAddVideoOpen(true)
+              }}
+              type="button"
+            >
+              <Plus aria-hidden="true" size={17} />
+              <span className="hidden sm:inline">Add video</span>
+              <span className="sm:hidden">Add</span>
+            </button>
+          </div>
         </div>
       </header>
       <main id="main-content">

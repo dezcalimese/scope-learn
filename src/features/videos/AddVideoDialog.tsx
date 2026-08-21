@@ -29,6 +29,7 @@ export function AddVideoDialog({
 
     if (isOpen && !dialog.open) {
       dialog.showModal()
+      dialog.querySelector<HTMLInputElement>('#video-title')?.focus()
     } else if (!isOpen && dialog.open) {
       dialog.close()
     }

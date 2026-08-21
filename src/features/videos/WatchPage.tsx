@@ -1,6 +1,7 @@
 import ArrowLeft from 'lucide-react/dist/esm/icons/arrow-left.mjs'
 import CircleAlert from 'lucide-react/dist/esm/icons/circle-alert.mjs'
 import { Link, useParams } from 'react-router-dom'
+import { CommentsPanel } from '../comments/CommentsPanel.tsx'
 import { VideoPlayer } from '../player/VideoPlayer.tsx'
 import { useVideo } from './videoQueries.ts'
 
@@ -62,18 +63,7 @@ export function WatchPage() {
               {videoQuery.data.description}
             </p>
           </article>
-          <aside
-            aria-labelledby="discussion-title"
-            className="rounded-3xl border border-line bg-white/65 p-6"
-          >
-            <p className="text-sm font-medium text-muted">Discussion</p>
-            <h2 className="mt-1 text-xl font-semibold" id="discussion-title">
-              Learn together
-            </h2>
-            <p className="mt-4 text-sm leading-6 text-muted">
-              Lesson comments arrive after the video creation flow.
-            </p>
-          </aside>
+          <CommentsPanel videoId={videoQuery.data.videoId} />
         </div>
       )}
     </div>
