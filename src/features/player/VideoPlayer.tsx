@@ -248,19 +248,20 @@ export function VideoPlayer({ title, url }: VideoPlayerProps) {
             )}
           </button>
 
-          <span className="min-w-24 text-xs font-medium tabular-nums text-white/80">
+          <span className="hidden min-w-24 text-xs font-medium tabular-nums text-white/80 min-[400px]:inline">
             {formatTime(currentTime)} / {formatTime(duration)}
           </span>
 
-          <div className="ml-auto hidden items-center sm:flex">
-            <button
-              aria-label={isMuted ? 'Unmute video' : 'Mute video'}
-              className="grid size-10 place-items-center rounded-full transition hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              onClick={toggleMute}
-              type="button"
-            >
-              <VolumeIcon aria-hidden="true" size={18} />
-            </button>
+          <button
+            aria-label={isMuted ? 'Unmute video' : 'Mute video'}
+            className="ml-auto grid size-10 shrink-0 place-items-center rounded-full transition hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            onClick={toggleMute}
+            type="button"
+          >
+            <VolumeIcon aria-hidden="true" size={18} />
+          </button>
+
+          <div className="hidden items-center sm:flex">
             <label className="sr-only" htmlFor="video-volume">
               Volume
             </label>

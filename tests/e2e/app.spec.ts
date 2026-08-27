@@ -78,6 +78,7 @@ test('opens a lesson from the library and exposes player controls', async ({
     page.getByRole('heading', { name: 'How Flowers Bloom' }),
   ).toBeVisible()
   await expect(page.getByRole('button', { name: 'Play video' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Mute video' })).toBeVisible()
   await page.getByLabel('Playback speed').selectOption('1.5')
   await expect(page.getByLabel('Playback speed')).toHaveValue('1.5')
   await expect(page.getByText('No comments yet.')).toBeVisible()

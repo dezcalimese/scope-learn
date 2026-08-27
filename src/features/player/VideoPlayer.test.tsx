@@ -19,6 +19,7 @@ describe('VideoPlayer', () => {
 
     expect(screen.getByRole('button', { name: 'Play video' })).toBeVisible()
     expect(screen.getByLabelText('Video progress')).toBeVisible()
+    expect(screen.getByRole('button', { name: 'Mute video' })).toBeVisible()
     expect(screen.getByLabelText('Volume')).toBeVisible()
     expect(screen.getByLabelText('Playback speed')).toBeVisible()
     expect(
